@@ -1,0 +1,33 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: bakery_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./backend
+    container_name: bakery_api
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: staging
+      SECRET_KEY: dev-secret-change-me
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB_NAME: bakery_orders
+      FACTORY_TIMEZONE: Asia/Jerusalem
+
+volumes:
+  mongo_data:

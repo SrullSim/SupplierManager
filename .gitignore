@@ -1,0 +1,205 @@
+# .gitignore for Python projects developed in PyCharm (JetBrains)
+# Recommended ignores for PyCharm and common Python tooling
+
+# ----------------------
+# JetBrains / PyCharm
+# ----------------------
+# Ignore the entire IDE project folder (local settings, workspace, caches, etc.)
+.idea/
+# If you want to share some project settings, consider excluding only workspace files instead:
+# .idea/**/workspace.xml
+# .idea/**/tasks.xml
+# Keep the .idea directory out of the repo unless you intentionally share it.
+
+# Module files
+*.iml
+*.iws
+
+# ----------------------
+# Python
+# ----------------------
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask instance folder
+instance/
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# virtualenv
+venv/
+venv*/
+ENV/
+env/
+.env/
+.venv/
+env.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# Pyre
+.pyre/
+
+# coverage reports, caches, and logs
+coverage.xml
+*.cover
+.cache/
+logs/
+
+# PyCharm specific caches and local history (if .idea is not ignored)
+# .idea/**/workspace.xml
+# .idea/**/caches/
+
+# ----------------------
+# OS generated files
+# ----------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ----------------------
+# Editor backups and temporary files
+# ----------------------
+# Vim
+*.swp
+.swp
+*.swo
+
+# Emacs
+*~
+
+# Visual Studio Code
+.vscode/
+
+# ----------------------
+# Optional: secret and config files
+# ----------------------
+# Environment variables file (commonly used with python-dotenv)
+.env
+.env.*
+# ...but keep the committed template
+!.env.example
+
+# API keys, local credentials
+secrets.yml
+credentials.json
+
+# ----------------------
+# Build / IDE artifacts you may also want to ignore
+# ----------------------
+*.log
+*.sqlite3
+*.db
+
+# ----------------------
+# Docker
+# ----------------------
+docker-compose.override.yml
+
+# ----------------------
+# Flutter / Dart
+# ----------------------
+frontend/.dart_tool/
+frontend/.packages
+frontend/.pub-cache/
+frontend/.pub/
+frontend/build/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/*.iml
+
+# ----------------------
+# Project-specific
+# ----------------------
+# Real env files (secrets) — never commit
+backend/.env.staging
+backend/.env.prod
+
+# End of .gitignore
