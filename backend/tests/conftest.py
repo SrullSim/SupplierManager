@@ -15,6 +15,7 @@ from branches.models import Branch  # noqa: E402
 from catalog.models import Product  # noqa: E402
 from deliveries.models import Delivery, DeliverySchedule  # noqa: E402
 from main import app  # noqa: E402
+from orders.models import Order  # noqa: E402
 
 
 @pytest_asyncio.fixture(autouse=True)
@@ -22,7 +23,7 @@ async def init_test_db():
     client = AsyncMongoMockClient()
     await init_beanie(
         database=client["bakery_test"],
-        document_models=[User, RefreshToken, Product, Branch, Delivery, DeliverySchedule],
+        document_models=[User, RefreshToken, Product, Branch, Delivery, DeliverySchedule, Order],
     )
     yield
     # mongomock resets state between tests automatically

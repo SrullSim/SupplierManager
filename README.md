@@ -159,8 +159,8 @@ make check     # all of the above
 
 - [x] **M1** Backend foundation (core, auth, JWT, rate limiting, tests)
 - [x] **M2** Branches & catalog (products, branch CRUD, assignment, least-privilege)
-- [ ] **M3** Deliveries & schedule (recurring weekly, one-off, factory config)
-- [ ] **M4** Orders & 12h lock (create/edit/confirm, lock enforcement, empty-order notify)
+- [x] **M3** Deliveries & schedule (recurring weekly, one-off, factory config)
+- [x] **M4** Orders & 12h lock (create/edit/confirm, lock enforcement, factory summary)
 - [ ] **M5** Flutter auth + app shell (login, routing, RTL/Hebrew)
 - [ ] **M6** Flutter branch UI (product list, order builder, lock indicator)
 - [ ] **M7** Flutter factory UI (branch list, order summary, catalog management)

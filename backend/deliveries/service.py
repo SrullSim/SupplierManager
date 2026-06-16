@@ -22,10 +22,15 @@ def cutoff_utc(delivery_datetime: datetime) -> datetime:
     return _ensure_utc(delivery_datetime) - timedelta(hours=LOCK_HOURS)
 
 
-def is_locked(delivery: Delivery) -> bool:
-    if delivery.status in ("locked", "completed"):
+def is_locked_dt(delivery_datetime: datetime, delivery_status: str = "open") -> bool:
+    """Lock check from a raw datetime + status. Used by the orders module."""
+    if delivery_status in ("locked", "completed"):
         return True
-    return datetime.now(UTC) >= cutoff_utc(delivery.delivery_datetime)
+    return datetime.now(UTC) >= cutoff_utc(delivery_datetime)
+
+
+def is_locked(delivery: Delivery) -> bool:
+    return is_locked_dt(delivery.delivery_datetime, delivery.status)
 
 
 def _delivery_to_out(d: Delivery) -> dict:

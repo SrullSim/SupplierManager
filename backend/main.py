@@ -17,10 +17,13 @@ from core.config import settings
 from core.database import close_db, connect_db
 from deliveries.models import Delivery, DeliverySchedule
 from deliveries.router import router as deliveries_router
+from orders.models import Order
+from orders.router import branch_router as orders_branch_router
+from orders.router import factory_router as orders_factory_router
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["200/minute"])
 
-ALL_DOCUMENT_MODELS = [User, RefreshToken, Product, Branch, Delivery, DeliverySchedule]
+ALL_DOCUMENT_MODELS = [User, RefreshToken, Product, Branch, Delivery, DeliverySchedule, Order]
 
 
 @asynccontextmanager
@@ -52,6 +55,8 @@ app.include_router(catalog_router)
 app.include_router(branches_router)
 app.include_router(branch_router)
 app.include_router(deliveries_router)
+app.include_router(orders_branch_router)
+app.include_router(orders_factory_router)
 
 
 @app.get("/health")
