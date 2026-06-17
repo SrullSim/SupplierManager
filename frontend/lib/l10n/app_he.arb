@@ -1,0 +1,18 @@
+{
+  "@@locale": "he",
+  "appTitle": "ניהול ספק",
+  "loginTitle": "התחברות",
+  "branchCodeLabel": "קוד סניף",
+  "passwordLabel": "סיסמה",
+  "loginButton": "התחבר",
+  "loginErrorInvalid": "קוד סניף או סיסמה שגויים",
+  "loginErrorNetwork": "שגיאת רשת. בדוק שהשרת פועל.",
+  "branchCodeRequired": "יש להזין קוד סניף",
+  "passwordRequired": "יש להזין סיסמה",
+  "logoutButton": "התנתק",
+  "factoryHomeTitle": "ממשק מפעל",
+  "branchHomeTitle": "ממשק סניף",
+  "welcomeFactory": "ברוך הבא, מנהל המפעל",
+  "welcomeBranch": "ברוך הבא לממשק הסניף",
+  "comingSoon": "בקרוב"
+}

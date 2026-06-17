@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "appTitle": "Supplier Manager",
+  "loginTitle": "Sign in",
+  "branchCodeLabel": "Branch code",
+  "passwordLabel": "Password",
+  "loginButton": "Sign in",
+  "loginErrorInvalid": "Invalid branch code or password",
+  "loginErrorNetwork": "Network error. Check that the server is running.",
+  "branchCodeRequired": "Branch code is required",
+  "passwordRequired": "Password is required",
+  "logoutButton": "Sign out",
+  "factoryHomeTitle": "Factory interface",
+  "branchHomeTitle": "Branch interface",
+  "welcomeFactory": "Welcome, factory admin",
+  "welcomeBranch": "Welcome to the branch interface",
+  "comingSoon": "Coming soon"
+}
