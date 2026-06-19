@@ -163,7 +163,7 @@ make check     # all of the above
 - [x] **M4** Orders & 12h lock (create/edit/confirm, lock enforcement, factory summary)
 - [x] **M5** Flutter auth + app shell (login, routing, RTL/Hebrew) — *code complete, run via [frontend/FLUTTER_SETUP.md](frontend/FLUTTER_SETUP.md)*
 - [x] **M6** Flutter branch UI (product list, order builder, lock indicator + countdown)
-- [ ] **M7** Flutter factory UI (branch list, order summary, catalog management)
+- [x] **M7** Flutter factory UI (dashboard, branches, catalog, deliveries, order summary)
 - [ ] **M8** Push notifications (FCM, pre-lock reminders)
 - [ ] **M9** Polish & tooling (pre-commit, full README, staging/prod configs)
 

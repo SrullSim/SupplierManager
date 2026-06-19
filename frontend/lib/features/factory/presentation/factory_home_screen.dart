@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/application/auth_controller.dart';
 
-/// Placeholder factory home. Real screens (branches, catalog, deliveries,
-/// order summaries) arrive in Milestone 7.
+/// Factory dashboard: entry points to branches, catalog, and deliveries.
 class FactoryHomeScreen extends ConsumerWidget {
   const FactoryHomeScreen({super.key});
 
@@ -24,15 +24,63 @@ class FactoryHomeScreen extends ConsumerWidget {
         ],
       ),
       body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 640),
+          child: GridView.count(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(24),
+            crossAxisCount: 2,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            childAspectRatio: 1.3,
+            children: [
+              _DashboardCard(
+                icon: Icons.store,
+                label: t.navBranches,
+                onTap: () => context.go('/factory/branches'),
+              ),
+              _DashboardCard(
+                icon: Icons.bakery_dining,
+                label: t.navCatalog,
+                onTap: () => context.go('/factory/catalog'),
+              ),
+              _DashboardCard(
+                icon: Icons.local_shipping,
+                label: t.navDeliveries,
+                onTap: () => context.go('/factory/deliveries'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DashboardCard extends StatelessWidget {
+  const _DashboardCard({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Card(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.factory, size: 64),
-            const SizedBox(height: 16),
-            Text(t.welcomeFactory,
-                style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 8),
-            Text(t.comingSoon, style: Theme.of(context).textTheme.bodyMedium),
+            Icon(icon, size: 48, color: scheme.primary),
+            const SizedBox(height: 12),
+            Text(label, style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
       ),
