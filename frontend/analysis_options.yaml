@@ -5,7 +5,8 @@ linter:
     prefer_const_constructors: true
     prefer_final_locals: true
     avoid_print: true
-    require_trailing_commas: true
+    # Note: trailing commas are managed by `dart format`, so we don't
+    # enable require_trailing_commas (it conflicts with the formatter).
 
 analyzer:
   errors:

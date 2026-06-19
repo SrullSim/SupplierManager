@@ -11,6 +11,7 @@ sys.path.insert(0, "backend")
 
 os.environ.setdefault("BOOTSTRAP_ADMIN_CODE", "admin")
 os.environ.setdefault("BOOTSTRAP_ADMIN_PASSWORD", "admin1234")
+os.environ.setdefault("SECRET_KEY", "dev-secret-key-not-for-production")
 
 from auth.models import RefreshToken, User  # noqa: E402
 from branches.models import Branch  # noqa: E402

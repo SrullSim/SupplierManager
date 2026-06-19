@@ -81,9 +81,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       TextFormField(
                         controller: _codeController,
                         textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(labelText: t.branchCodeLabel),
-                        validator: (v) =>
-                            (v == null || v.trim().isEmpty) ? t.branchCodeRequired : null,
+                        decoration:
+                            InputDecoration(labelText: t.branchCodeLabel),
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? t.branchCodeRequired
+                            : null,
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
@@ -94,18 +96,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         decoration: InputDecoration(
                           labelText: t.passwordLabel,
                           suffixIcon: IconButton(
-                            icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
-                            onPressed: () => setState(() => _obscure = !_obscure),
+                            icon: Icon(_obscure
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            onPressed: () =>
+                                setState(() => _obscure = !_obscure),
                           ),
                         ),
-                        validator: (v) =>
-                            (v == null || v.isEmpty) ? t.passwordRequired : null,
+                        validator: (v) => (v == null || v.isEmpty)
+                            ? t.passwordRequired
+                            : null,
                       ),
                       if (errorText != null) ...[
                         const SizedBox(height: 16),
                         Text(
                           errorText,
-                          style: TextStyle(color: Theme.of(context).colorScheme.error),
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.error),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -116,7 +123,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ? const SizedBox(
                                 height: 20,
                                 width: 20,
-                                child: CircularProgressIndicator(strokeWidth: 2),
+                                child:
+                                    CircularProgressIndicator(strokeWidth: 2),
                               )
                             : Text(t.loginButton),
                       ),

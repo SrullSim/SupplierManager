@@ -46,7 +46,7 @@ flutter gen-l10n
 
 ## שלב 4 — להריץ בדפדפן
 
-ודא שה-backend רץ (ראה [../RUN.md](../RUN.md)), ואז:
+ודא שה-backend רץ (ראה [../RUN.m yhd](../RUN.md)), ואז:
 
 ```bash
 flutter run -d chrome --dart-define=API_BASE_URL=http://127.0.0.1:8000
@@ -59,7 +59,7 @@ flutter run -d chrome --dart-define=API_BASE_URL=http://127.0.0.1:8000
 - סניף: `jeru01` / `branch1234` → מגיע למסך "ממשק סניף"
 
 ---
-
+   
 ## הגדרות (Feature Flags)
 
 מועברות עם `--dart-define`:

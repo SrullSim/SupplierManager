@@ -22,7 +22,8 @@ GoRouter buildRouter(Ref ref) {
       }
 
       // Authenticated: send each role to its home, away from /login.
-      final home = auth.user!.role == UserRole.factoryAdmin ? '/factory' : '/branch';
+      final home =
+          auth.user!.role == UserRole.factoryAdmin ? '/factory' : '/branch';
       if (loggingIn) return home;
 
       // Guard cross-role access.

@@ -29,7 +29,8 @@ class FactoryHomeScreen extends ConsumerWidget {
           children: [
             const Icon(Icons.factory, size: 64),
             const SizedBox(height: 16),
-            Text(t.welcomeFactory, style: Theme.of(context).textTheme.titleLarge),
+            Text(t.welcomeFactory,
+                style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             Text(t.comingSoon, style: Theme.of(context).textTheme.bodyMedium),
           ],

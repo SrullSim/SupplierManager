@@ -27,7 +27,8 @@ void main() {
 
   group('AuthUser.fromAccessToken', () {
     test('decodes a factory admin token', () {
-      final token = _fakeJwt({'sub': 'u1', 'role': 'factory_admin', 'branch_id': null});
+      final token =
+          _fakeJwt({'sub': 'u1', 'role': 'factory_admin', 'branch_id': null});
       final user = AuthUser.fromAccessToken(token);
       expect(user, isNotNull);
       expect(user!.role, UserRole.factoryAdmin);
@@ -36,7 +37,8 @@ void main() {
     });
 
     test('decodes a branch user token with branch_id', () {
-      final token = _fakeJwt({'sub': 'u2', 'role': 'branch_user', 'branch_id': 'b9'});
+      final token =
+          _fakeJwt({'sub': 'u2', 'role': 'branch_user', 'branch_id': 'b9'});
       final user = AuthUser.fromAccessToken(token);
       expect(user!.role, UserRole.branchUser);
       expect(user.branchId, 'b9');
@@ -50,7 +52,8 @@ void main() {
 
   group('TokenPair.fromJson', () {
     test('parses access + refresh', () {
-      final pair = TokenPair.fromJson({'access_token': 'a', 'refresh_token': 'r'});
+      final pair =
+          TokenPair.fromJson({'access_token': 'a', 'refresh_token': 'r'});
       expect(pair.access, 'a');
       expect(pair.refresh, 'r');
     });
