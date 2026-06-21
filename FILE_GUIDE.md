@@ -113,14 +113,24 @@ models.py      ← מבנה הנתונים במסד (Mongo)
 | [orders/service.py](backend/orders/service.py) | **לב הלוגיקה:** אכיפת נעילת 12 שעות, אימות שמוצר משויך+פעיל, מיזוג כפילויות, סיכום למפעל |
 | [orders/repository.py](backend/orders/repository.py) | גישה ל-DB של הזמנות (הזמנה אחת לכל סניף+משלוח) |
 | [orders/router.py](backend/orders/router.py) | צד סניף: `GET/PUT /branch/orders/{id}`, `POST .../confirm`. צד מפעל: `GET /factory/deliveries/{id}/summary` |
+| [orders/finalization.py](backend/orders/finalization.py) | **סגירה אוטומטית בנעילה:** אישור-אוטומטי לטיוטות עם פריטים, סימון "ריק" לסניפים בלי הזמנה, נעילת המשלוח, ושליחת התראות תזכורת. |
 
-### `backend/notifications/` , `backend/orders/` ריקים?
+### `backend/notifications/` — התראות push
 
-| תיקייה | מצב |
-|--------|-----|
-| [backend/notifications/](backend/notifications/) | ריק — יתמלא ב-Milestone 8 (התראות push) |
+| קובץ | תוכן |
+|------|------|
+| [notifications/models.py](backend/notifications/models.py) | `PushToken` — כמה מכשירים (טוקנים) לכל סניף |
+| [notifications/schemas.py](backend/notifications/schemas.py) | אימות רישום טוקן |
+| [notifications/service.py](backend/notifications/service.py) | שליחת FCM אם יש credentials, אחרת no-op עם log. רישום טוקנים, שליחה לסניף. |
+| [notifications/router.py](backend/notifications/router.py) | `POST /branch/push-token` |
 
-### `backend/tests/` — בדיקות
+### `backend/core/scheduler.py` — תזמון רקע
+
+| קובץ | תוכן |
+|------|------|
+| [core/scheduler.py](backend/core/scheduler.py) | APScheduler — מריץ כל כמה דקות את הסגירה האוטומטית + התזכורות. מופעל ב-lifespan של [main.py](backend/main.py). |
+
+### `backend/tests/` — בדיקות (86 בסך הכל)
 
 | קובץ | בודק |
 |------|------|
@@ -130,6 +140,31 @@ models.py      ← מבנה הנתונים במסד (Mongo)
 | [tests/test_branches.py](backend/tests/test_branches.py) | סניפים, הנפקת סיסמה, בידוד least-privilege |
 | [tests/test_deliveries.py](backend/tests/test_deliveries.py) | לו"ז, משלוחים, יצירה אוטומטית, שעון קיץ |
 | [tests/test_orders.py](backend/tests/test_orders.py) | **הזמנות + כל מקרי הקצה של נעילת 12 השעות** |
+| [tests/test_finalization.py](backend/tests/test_finalization.py) | סגירה אוטומטית, אישור-אוטומטי, נעילה, תזכורות |
+| [tests/test_notifications.py](backend/tests/test_notifications.py) | רישום טוקנים, ריבוי מכשירים, שליחה |
+
+---
+
+## `frontend/` — אפליקציית Flutter (web, עברית RTL)
+
+המבנה הוא **feature-first**: כל פיצ׳ר עם `data` (API) / `domain` (מודלים) / `application` (Riverpod) / `presentation` (מסכים).
+
+| קובץ / תיקייה | תוכן |
+|----------------|------|
+| [frontend/lib/main.dart](frontend/lib/main.dart) | נקודת כניסה — עוטף ב-ProviderScope |
+| [frontend/lib/app/app.dart](frontend/lib/app/app.dart) | MaterialApp.router, עברית + RTL |
+| [frontend/lib/app/router.dart](frontend/lib/app/router.dart) | go_router — ניווט לפי תפקיד (מפעל/סניף) + הגנות |
+| [frontend/lib/core/config/](frontend/lib/core/config/app_config.dart) | כתובת ה-API + feature flag לריבוי שפות |
+| [frontend/lib/core/network/](frontend/lib/core/network/dio_client.dart) | dio + interceptor שמצרף את הטוקן |
+| [frontend/lib/core/storage/](frontend/lib/core/storage/token_storage.dart) | שמירת JWT מאובטחת |
+| [frontend/lib/core/utils/](frontend/lib/core/utils/datetime_format.dart) | פורמט תאריכים + ספירה לאחור |
+| [frontend/lib/l10n/](frontend/lib/l10n/app_he.arb) | תרגומים (`app_he.arb` עברית, `app_en.arb` אנגלית) |
+| **auth** | [data](frontend/lib/features/auth/data/auth_repository.dart) / [application](frontend/lib/features/auth/application/auth_controller.dart) / [presentation](frontend/lib/features/auth/presentation/login_screen.dart) — התחברות + פענוח JWT |
+| **branch** | [order controller](frontend/lib/features/branch/application/branch_order_controller.dart) + [מסך הזמנה](frontend/lib/features/branch/presentation/branch_home_screen.dart) — בניית הזמנה, ספירת נעילה |
+| **factory** | [repository](frontend/lib/features/factory/data/factory_repository.dart) + מסכים: [דשבורד](frontend/lib/features/factory/presentation/factory_home_screen.dart), [קטלוג](frontend/lib/features/factory/presentation/catalog_screen.dart), [סניפים](frontend/lib/features/factory/presentation/branches_screen.dart), [משלוחים](frontend/lib/features/factory/presentation/deliveries_screen.dart), [סיכום](frontend/lib/features/factory/presentation/delivery_summary_screen.dart) |
+| [frontend/test/](frontend/test/) | בדיקות פענוח מודלים + smoke test של מסך ההתחברות (15) |
+
+> **באג ב-UI?** קודם בדוק את ה-`presentation` (המסך), אז את ה-`application` (ה-controller/state), אז את ה-`data` (קריאות ה-API). שגיאת רשת? בדוק ש-`API_BASE_URL` נכון ושה-backend רץ.
 
 ---
 

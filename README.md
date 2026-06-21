@@ -161,11 +161,13 @@ make check     # all of the above
 - [x] **M2** Branches & catalog (products, branch CRUD, assignment, least-privilege)
 - [x] **M3** Deliveries & schedule (recurring weekly, one-off, factory config)
 - [x] **M4** Orders & 12h lock (create/edit/confirm, lock enforcement, factory summary)
-- [x] **M5** Flutter auth + app shell (login, routing, RTL/Hebrew) — *code complete, run via [frontend/FLUTTER_SETUP.md](frontend/FLUTTER_SETUP.md)*
+- [x] **M5** Flutter auth + app shell (login, routing, RTL/Hebrew)
 - [x] **M6** Flutter branch UI (product list, order builder, lock indicator + countdown)
 - [x] **M7** Flutter factory UI (dashboard, branches, catalog, deliveries, order summary)
 - [x] **M8** Notifications & lock finalization (push tokens, pre-lock reminders, auto-confirm + empty-order finalize at cutoff)
-- [ ] **M9** Polish & tooling (pre-commit, full README, staging/prod configs)
+- [x] **M9** Polish & tooling (pre-commit, full run guide, frontend in check script)
+
+**All milestones complete.** Full run guide: [RUN.md](RUN.md) · file map: [FILE_GUIDE.md](FILE_GUIDE.md)
 
 ## License
 

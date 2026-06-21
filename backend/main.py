@@ -48,8 +48,8 @@ async def lifespan(app: FastAPI):  # type: ignore[type-arg]
 
 
 app = FastAPI(
-    title="Bakery Orders API",
-    version="0.1.0",
+    title="Supplier Manager API",
+    version="1.0.0",
     lifespan=lifespan,
 )
 
