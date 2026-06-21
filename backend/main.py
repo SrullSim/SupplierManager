@@ -15,21 +15,35 @@ from catalog.models import Product
 from catalog.router import router as catalog_router
 from core.config import settings
 from core.database import close_db, connect_db
+from core.scheduler import start_scheduler, stop_scheduler
 from deliveries.models import Delivery, DeliverySchedule
 from deliveries.router import router as deliveries_router
+from notifications.models import PushToken
+from notifications.router import router as notifications_router
 from orders.models import Order
 from orders.router import branch_router as orders_branch_router
 from orders.router import factory_router as orders_factory_router
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["200/minute"])
 
-ALL_DOCUMENT_MODELS = [User, RefreshToken, Product, Branch, Delivery, DeliverySchedule, Order]
+ALL_DOCUMENT_MODELS = [
+    User,
+    RefreshToken,
+    Product,
+    Branch,
+    Delivery,
+    DeliverySchedule,
+    Order,
+    PushToken,
+]
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):  # type: ignore[type-arg]
     await connect_db(ALL_DOCUMENT_MODELS)
+    start_scheduler()
     yield
+    stop_scheduler()
     await close_db()
 
 
@@ -57,6 +71,7 @@ app.include_router(branch_router)
 app.include_router(deliveries_router)
 app.include_router(orders_branch_router)
 app.include_router(orders_factory_router)
+app.include_router(notifications_router)
 
 
 @app.get("/health")

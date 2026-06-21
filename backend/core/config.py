@@ -28,6 +28,11 @@ class Settings(BaseSettings):
     # Notifications
     firebase_credentials_json: str = ""
 
+    # Scheduler & reminders
+    scheduler_enabled: bool = True
+    scheduler_interval_minutes: int = 5  # how often the finalization/reminder job runs
+    reminder_lead_hours: int = 2  # send the pre-lock reminder this long before cutoff
+
     @field_validator("factory_timezone")
     @classmethod
     def validate_timezone(cls, v: str) -> str:

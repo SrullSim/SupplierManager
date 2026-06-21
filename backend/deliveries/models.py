@@ -27,6 +27,7 @@ class Delivery(Document):
     source: Literal["scheduled", "one_off"] = "scheduled"
     schedule_ref_id: str | None = None
     status: Literal["open", "locked", "completed"] = "open"
+    reminder_sent: bool = False  # pre-lock reminder dispatched (sent once)
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
     class Settings:
